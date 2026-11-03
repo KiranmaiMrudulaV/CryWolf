@@ -1,0 +1,72 @@
+{
+  "q_learning": {
+    "mean_reward": 1.49,
+    "detection_rate": 0.795,
+    "false_alarm_rate": 0.025,
+    "miss_rate": 0.205,
+    "mean_delay_frames": 9.58
+  },
+  "ppo": {
+    "mean_reward": -8.97,
+    "detection_rate": 0.0,
+    "false_alarm_rate": 0.0,
+    "miss_rate": 1.0,
+    "mean_delay_frames": null
+  },
+  "dqn": {
+    "mean_reward": 1.11,
+    "detection_rate": 0.933,
+    "false_alarm_rate": 0.222,
+    "miss_rate": 0.067,
+    "mean_delay_frames": 6.85
+  },
+  "threshold_0.35": {
+    "mean_reward": -8.08,
+    "detection_rate": 1.0,
+    "false_alarm_rate": 0.894,
+    "miss_rate": 0.0,
+    "mean_delay_frames": 3.06
+  },
+  "threshold_0.40": {
+    "mean_reward": -6.01,
+    "detection_rate": 0.997,
+    "false_alarm_rate": 0.765,
+    "miss_rate": 0.003,
+    "mean_delay_frames": 4.17
+  },
+  "threshold_0.45": {
+    "mean_reward": -3.46,
+    "detection_rate": 0.984,
+    "false_alarm_rate": 0.595,
+    "miss_rate": 0.016,
+    "mean_delay_frames": 5.07
+  },
+  "threshold_0.50": {
+    "mean_reward": -1.06,
+    "detection_rate": 0.953,
+    "false_alarm_rate": 0.402,
+    "miss_rate": 0.047,
+    "mean_delay_frames": 6.34
+  },
+  "threshold_0.55": {
+    "mean_reward": 0.7,
+    "detection_rate": 0.917,
+    "false_alarm_rate": 0.229,
+    "miss_rate": 0.083,
+    "mean_delay_frames": 7.69
+  },
+  "threshold_0.60": {
+    "mean_reward": 1.02,
+    "detection_rate": 0.838,
+    "false_alarm_rate": 0.114,
+    "miss_rate": 0.162,
+    "mean_delay_frames": 9.19
+  },
+  "threshold_0.65": {
+    "mean_reward": 0.55,
+    "detection_rate": 0.746,
+    "false_alarm_rate": 0.045,
+    "miss_rate": 0.254,
+    "mean_delay_frames": 10.1
+  }
+}
