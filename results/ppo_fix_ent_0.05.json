@@ -1,0 +1,7 @@
+{
+  "mean_reward": 1.63,
+  "detection_rate": 0.842,
+  "false_alarm_rate": 0.071,
+  "miss_rate": 0.158,
+  "mean_delay_frames": 8.85
+}

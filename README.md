@@ -117,11 +117,38 @@ background level random-walks (drift). Some threats are now barely above noise.
 | PPO | -8.97 | 0% | 0% | none |
 
 Q-learning still beats the best fixed threshold, with far fewer false alarms.
-PPO collapsed to a "never alert" policy (a local optimum, since early alerts
-are mostly penalized); it would need tuning, e.g. more entropy or longer
-training. Single seed, so differences between close agents are within noise.
+The default PPO collapsed to "never alert" (reward -8.97, exactly what you get
+from 50% misses at -20 and 50% quiet episodes at +2). Single seed, so
+differences between close agents are within noise.
+
+### Fixing the PPO collapse (`python ppo_fixes.py <variant>`)
+
+Likely cause (hypothesis): early random alerts are almost always false alarms
+(-10), so PPO pushes alert probability toward zero and then rarely explores the
+late-episode alerts that earn +10. Each fix below was tried alone on the hard
+environment (seed 0) and evaluated on the original unshaped rewards:
+
+| PPO variant | Mean reward | Detection | False alarms | Delay |
+|---|---|---|---|---|
+| Baseline (ent 0.01, 300k steps) | -8.97 | 0% | 0% | none |
+| Entropy 0.05 | 1.63 | 84.2% | 7.1% | 8.85 |
+| Entropy 0.10 | 1.51 | 82.0% | 5.5% | 9.13 |
+| VecNormalize (reward norm.) | 1.75 | 85.4% | 7.8% | 8.54 |
+| 1M steps | 1.82 | 86.1% | 7.8% | 8.76 |
+| Step cost 0.5/frame once a threat is active (training only) | **1.83** | 86.8% | 8.8% | 8.51 |
+| Entropy 0.05 + VecNormalize + step cost | 1.57 | 90.2% | 14.8% | 7.86 |
+| *Q-learning (for reference)* | 1.49 | 79.5% | 2.5% | 9.58 |
+| *Best threshold (0.60)* | 1.02 | 83.8% | 11.4% | 9.19 |
+
+Every fix escaped the collapse, and all of them beat the best fixed threshold
+and Q-learning on mean reward. The fixes are within about 0.3 of each other,
+which is likely noise from a single seed, so I would not rank them. Combining
+them did not help. Caveat: the exact reason the baseline collapsed is not
+verified; the fact that independent fixes all work is consistent with an
+exploration problem but does not prove it.
 
 ## Next steps
 
 * Multiple seeds with confidence intervals.
-* Tune PPO/DQN, or give them a longer history window.
+* Verify the collapse cause by inspecting PPO's alert probability by score.
+* Tune DQN (22% false alarms in the hard environment).

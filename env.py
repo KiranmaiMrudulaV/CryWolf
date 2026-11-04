@@ -38,6 +38,7 @@ class EnvConfig:
     # harder-environment options (off by default, so the base env is unchanged)
     threat_strengths: tuple | None = None  # if set, each threat draws its strength from this tuple
     drift_std: float = 0.0         # per-frame random-walk step of the background level
+    r_step_threat: float = 0.0     # reward shaping: cost per WAIT frame while a threat is active
 
 
 class AlertEnv:
@@ -102,4 +103,4 @@ class AlertEnv:
             return self._obs(), c.r_clear, True, info
 
         self.scores.append(self._score(self.t))
-        return self._obs(), 0.0, False, info
+        return self._obs(), (-c.r_step_threat if threat_active else 0.0), False, info
